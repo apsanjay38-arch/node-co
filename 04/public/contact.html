@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Contact Node & Co. using the form.">
+    <title>Contact | Node &amp; Co.</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Node and Co. home">
+        <span class="brand-mark">N</span>
+        <span>Node <span class="brand-muted">&amp; Co.</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a class="active" href="/contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page-main">
+      <section class="page-intro">
+        <p class="eyebrow">Your turn</p>
+        <h1>Drop us a note.</h1>
+        <p>Questions, ideas, or just saying hello—we’d love to hear from you.</p>
+      </section>
+
+      <section class="contact-layout">
+        <div class="contact-aside">
+          <span class="contact-decoration" aria-hidden="true">✳</span>
+          <p class="eyebrow">A note goes a long way</p>
+          <h2>Let’s make<br>something good.</h2>
+          <p>Fill in the details and send your message our way.</p>
+        </div>
+        <form class="contact-form" method="post" action="/contact">
+          <div id="status-banner" class="status-banner" role="status" aria-live="polite" hidden></div>
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required>
+
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" rows="5" maxlength="1000" required></textarea>
+
+          <button class="button" type="submit">Send message <span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Node &amp; Co.</span>
+      <span>Made for the curious.</span>
+    </footer>
+    <script>
+      const statusBanner = document.getElementById("status-banner");
+      const query = new URLSearchParams(window.location.search);
+
+      if (query.get("sent") === "1") {
+        statusBanner.textContent = "Thanks for your message! It has been received.";
+        statusBanner.classList.add("status-success");
+        statusBanner.hidden = false;
+      } else if (query.get("error") === "1") {
+        statusBanner.textContent = "Please check your details and try again.";
+        statusBanner.classList.add("status-error");
+        statusBanner.hidden = false;
+      }
+    </script>
+  </body>
+</html>
